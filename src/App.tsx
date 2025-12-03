@@ -203,7 +203,7 @@ function App() {
           
           <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-8">
             Spécialisé en infrastructure cloud AWS, automatisation DevOps et administration systèmes. 
-            Certifié Lenovo, AWS et Cisco CCNA.
+            Certifié Lenovo et AWS.
           </p>
 
           <div className="flex flex-wrap justify-center gap-4 mb-12">
