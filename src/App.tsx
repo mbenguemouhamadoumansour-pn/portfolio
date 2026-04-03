@@ -70,22 +70,49 @@ function App() {
 
   const projects = [
     {
-      title: "Application Gestion Smartphones",
-      description: "Site Fullstack pour la gestion de smartphones avec authentification, CRUD complet et interface moderne.",
-      tech: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
-      color: "from-blue-500 to-cyan-500"
+      title: "🔐 AfriSecure SOC",
+      description: "Plateforme intelligente de détection et réponse aux cyberattaques adaptée aux PME africaines. Modèle ML entraîné sur 2,3 millions de flux réseau avec 100% de précision. Détection DDoS, PortScan, BruteForce SSH avec blocage automatique via iptables.",
+      tech: ["Python", "Scapy", "Random Forest", "Flask", "iptables", "Linux"],
+      color: "from-green-500 to-emerald-500",
+      stats: "4 839 impressions LinkedIn · 100% précision ML · 2.3M flux",
+      badge: "🔥 PROJET PHARE",
+      featured: true
+    },
+    {
+      title: "🏥 Allo Docteur",
+      description: "Application e-santé connectant patients et hôpitaux en temps réel. Géolocalisation, réservation de lits, signalement d'urgences et enregistrement audio des symptômes.",
+      tech: ["React.js", "Tailwind CSS", "Geolocation API", "Web Audio API"],
+      color: "from-blue-500 to-cyan-500",
+      stats: "Porteur de projet · E-Santé Afrique · Prototype fonctionnel",
+      badge: "💡 STARTUP",
+      featured: true
     },
     {
       title: "Pipeline CI/CD Complet",
       description: "Pipeline automatisé : GitHub → SonarQube → Docker → DockerHub → Kubernetes avec IaC (Terraform/Ansible).",
       tech: ["Jenkins", "SonarQube", "Docker", "Kubernetes", "Terraform", "Ansible"],
-      color: "from-purple-500 to-pink-500"
+      color: "from-purple-500 to-pink-500",
+      stats: null,
+      badge: null,
+      featured: false
     },
     {
       title: "Infrastructure Monitoring & Security",
       description: "Système de monitoring et sécurité pour surveillance temps réel et détection de vulnérabilités.",
       tech: ["Prometheus", "Grafana", "Trivy", "Docker"],
-      color: "from-orange-500 to-red-500"
+      color: "from-orange-500 to-red-500",
+      stats: null,
+      badge: null,
+      featured: false
+    },
+    {
+      title: "Application Gestion Smartphones",
+      description: "Site Fullstack pour la gestion de smartphones avec authentification, CRUD complet et interface moderne.",
+      tech: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
+      color: "from-yellow-500 to-orange-500",
+      stats: null,
+      badge: null,
+      featured: false
     }
   ];
 
@@ -198,7 +225,7 @@ function App() {
           </h1>
           
           <h2 className="text-2xl md:text-3xl text-gray-300 mb-6">
-            Ingénieur Cloud & DevOps | Admin Systèmes & Réseaux
+             Ingénieur Cloud & DevSecOps | Admin Systèmes & Réseaux | Entrepreneur Tech 🇸🇳
           </h2>
           
           <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-8">
@@ -320,40 +347,80 @@ function App() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 px-4 bg-gray-900/50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold mb-12 text-center">
-            <span className="bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
-              Projets
-            </span>
-          </h2>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <div
-                key={index}
-                className="bg-gray-800 rounded-2xl overflow-hidden border border-gray-700 hover:border-blue-500 transition-all transform hover:scale-105 hover:shadow-2xl"
-              >
-                <div className={`h-2 bg-gradient-to-r ${project.color}`}></div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-3">{project.title}</h3>
-                  <p className="text-gray-400 mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech, i) => (
-                      <span
-                        key={i}
-                        className="px-3 py-1 bg-gray-700 rounded-full text-xs text-gray-300"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+<section id="projects" className="py-20 px-4 bg-gray-900/50">
+  <div className="max-w-7xl mx-auto">
+    <h2 className="text-4xl font-bold mb-12 text-center">
+      <span className="bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
+        Projets
+      </span>
+    </h2>
+
+    {/* Projets phares */}
+    <div className="grid md:grid-cols-2 gap-8 mb-8">
+      {projects.filter(p => p.featured).map((project, index) => (
+        <div
+          key={index}
+          className={`bg-gray-800 rounded-2xl overflow-hidden border transition-all transform hover:scale-105 hover:shadow-2xl relative
+            ${index === 0 ? 'border-green-500/50 hover:border-green-400' : 'border-blue-500/50 hover:border-blue-400'}`}
+        >
+          {project.badge && (
+            <div className="absolute top-4 right-4 z-10">
+              <span className={`px-3 py-1 rounded-full text-xs font-bold
+                ${index === 0
+                  ? 'bg-green-500/20 text-green-400 border border-green-500/30'
+                  : 'bg-blue-500/20 text-blue-400 border border-blue-500/30'}`}>
+                {project.badge}
+              </span>
+            </div>
+          )}
+          <div className={`h-2 bg-gradient-to-r ${project.color}`}></div>
+          <div className="p-6">
+            <h3 className="text-xl font-bold mb-3 pr-20">{project.title}</h3>
+            <p className="text-gray-400 mb-4 text-sm leading-relaxed">{project.description}</p>
+            {project.stats && (
+              <div className={`mb-4 p-3 rounded-lg text-xs font-medium
+                ${index === 0
+                  ? 'bg-green-500/10 text-green-400 border border-green-500/20'
+                  : 'bg-blue-500/10 text-blue-400 border border-blue-500/20'}`}>
+                📊 {project.stats}
               </div>
-            ))}
+            )}
+            <div className="flex flex-wrap gap-2">
+              {project.tech.map((tech, i) => (
+                <span key={i} className="px-3 py-1 bg-gray-700 rounded-full text-xs text-gray-300">
+                  {tech}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
-      </section>
+      ))}
+    </div>
+
+    {/* Autres projets */}
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {projects.filter(p => !p.featured).map((project, index) => (
+        <div
+          key={index}
+          className="bg-gray-800 rounded-2xl overflow-hidden border border-gray-700 hover:border-blue-500 transition-all transform hover:scale-105 hover:shadow-2xl"
+        >
+          <div className={`h-2 bg-gradient-to-r ${project.color}`}></div>
+          <div className="p-6">
+            <h3 className="text-xl font-bold mb-3">{project.title}</h3>
+            <p className="text-gray-400 mb-4 text-sm">{project.description}</p>
+            <div className="flex flex-wrap gap-2">
+              {project.tech.map((tech, i) => (
+                <span key={i} className="px-3 py-1 bg-gray-700 rounded-full text-xs text-gray-300">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* Experience Section */}
       <section id="experience" className="py-20 px-4">
